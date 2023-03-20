@@ -1,0 +1,25 @@
+report:
+  excel_path: ./report/excel/
+  check_log: ./report/logs/check_log/check.log
+  serial_log: ./report/logs/run_log/auto_run.log
+  auto_test_run: ./report/logs/run_log/run.log
+  sub_labels_log: ./report/logs/run_log/sub_labels.log
+
+yolo_model: ./runner/model/{}.pt
+labelImg_classes_path: ./labelImg/data/predefined_classes.txt
+
+game_serial_number:
+  - LOL                 # 0
+  - Apex_Legends        # 1
+  - Valorant            # 2
+  - Overwatch           # 3
+  - Fortnite            # 4
+  - csgo                # 5
+  - pubg                # 6
+  - cod                 # 7
+
+classes_txt_path: ./runner/classes/{}.txt
+
+images:
+  bg: ./runner/images/background/bg.png
+  icon: ./runner/images/icon/

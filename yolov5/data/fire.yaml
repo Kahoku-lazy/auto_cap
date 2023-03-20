@@ -1,0 +1,30 @@
+path: D:\Kahoku\HDMI_Project\auto_cap\Overwatch 
+train: images/train  
+val: images/val  
+test:  
+
+# Classes
+nc: 1  
+names: [
+    "Eliminated",
+    "Revenge",
+    "X_Player_Killed_Streak",
+    "Team_Killed",
+    "Ultimate_Skill_Ready",
+    "Overtime",
+    "Matching",
+    "Matched",
+    "Victory",
+    "Defeat",
+    "Reviving",
+    "Discord",
+    "Hacked",
+    "Sleep",
+    "Detected",
+    "Pinned",
+    "Stunned",
+    "Change_Hero",
+    "Prompts",
+    "Trapped",
+    "Stuck"
+] # class names
