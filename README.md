@@ -61,3 +61,18 @@
      # 脚本推理指令
      python main.py 3("模型代号") --func detect_
      ```
+   
+3.  **控制台运行指令**
+
+    1.   基础运行指令
+
+        - `main.py:`  `python` 文件
+        - `3`： 模型代号
+
+        ```bash
+        python main.py 3 --func "方法名" --args "参数"
+        ```
+
+        
+
+    2.  None
