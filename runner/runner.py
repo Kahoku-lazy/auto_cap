@@ -24,6 +24,9 @@ class Runner:
         # classes.txt
         self.classes_txt_path = self.config["classes_txt_path"].format(game_serial_number)
         self.classes_txt = self.data_.read_text(self.classes_txt_path)
+
+        # Lamp_effect 灯效id
+        self.lamp_effect = self.config["Lamp_effect"][str(game_serial_number)]
         
         # model path
         self.model_path = self.config["yolo_model"].format(game_serial_number)
@@ -129,11 +132,13 @@ class Runner:
         print("END")
 
     def test_01(self, args):
-        image_path, port = args[0], args[1]
+        image_path, port_wifi, prot_ble = args[0], args[1], args[2]
+
+        log = GetLog(self.config["report"]["test_log"], "test")
         bg = self.config["images"]["bg"]
-        ser = SerialWindows(port, baudrate=115200)
+        ser = [SerialWindows(port_wifi, baudrate=115200), SerialWindows(prot_ble, baudrate=921600)]
         self.test_01_result = [0 for x in range(len(self.classes_txt))]
-        df = self.test.run(image_path, self.test_01_result, ser, bg)
+        df = self.test.run(image_path, self.test_01_result, ser, bg, self.lamp_effect, log)
         dict_ = {
             "name": self.classes_txt,
             "TP": self.test_01_result
@@ -192,10 +197,13 @@ class Runner:
         picture_path, image_path= args[0], args[1]
         self.file_handling.picture_classify(picture_path, image_path, self.classes_txt)
 
-    def compare_move(self, args):
+    def compare_move(self):
         """ 移动图片 """
-        crop_path, picture_path = args[0], args[1]
+        crop_path = "../classes" 
+        picture_path = "../pictures"
+        count = 0
         for picture_dir in os.listdir(picture_path):
             for dir in os.listdir(crop_path):
                 path_ = os.path.join(crop_path, dir)
-                self.file_handling.crops_move(path_ , os.path.join(picture_path, picture_dir))
+                self.file_handling.crops_move(path_ , os.path.join(picture_path, picture_dir), count)
+            print(f"{picture_dir} >>> move count {count}")

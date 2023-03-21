@@ -338,14 +338,15 @@ class FileHandling:
                     continue
                 list_.append(img)
 
-    def crops_move(self, crops_path, picture_path):
-
+    def crops_move(self, crops_path, picture_path, count):
+        """参考模型crops结果 移动图片"""
         pictures = os.listdir(picture_path)
-
         new_path = f"../Model_Result/images/{os.path.split(crops_path)[-1]}"
+        if not os.path.exists(new_path):
+            os.makedirs(new_path)
         for i in os.listdir(crops_path):
             if i in pictures:
                 shutil.move(os.path.join(pictures, i), os.path.join(new_path, i))
-                print(f"move to {i}")
+                print(f"{os.path.split(picture_path)[-1]} >>> move to {i}")
                 count += 1
-        print(f"move count {count}")
+        return count 

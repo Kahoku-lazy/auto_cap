@@ -139,3 +139,13 @@ class SerialWindows:
         """ 清除缓冲区 """
         self.ser.reset_input_buffer() 
 
+
+if __name__ == "__main__":
+
+    port = "COM6"
+    ser = SerialWindows(port, baudrate=921600)
+    ser.open_serial()
+    while True:
+        data = ser.read_serila_data()
+        print(type(data))
+

@@ -64,7 +64,7 @@ class Main:
             self.run_.picture_classify(self.opt.args)
 
         elif self.opt.func == "compare_move":
-            self.run_.compare_move(self.opt.args)
+            self.run_.compare_move()
 
 
     

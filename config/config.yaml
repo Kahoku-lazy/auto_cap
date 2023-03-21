@@ -2,7 +2,7 @@ report:
   excel_path: ./report/excel/
   check_log: ./report/logs/check_log/check.log
   serial_log: ./report/logs/run_log/auto_run.log
-  auto_test_run: ./report/logs/run_log/run.log
+  test_log: ./report/logs/test_logs/test_result.log
   sub_labels_log: ./report/logs/run_log/sub_labels.log
 
 yolo_model: ./runner/model/{}.pt
@@ -23,3 +23,24 @@ classes_txt_path: ./runner/classes/{}.txt
 images:
   bg: ./runner/images/background/bg.png
   icon: ./runner/images/icon/
+
+Lamp_effect:
+  "2":
+    - 104
+    - 109
+    - 302
+    - 301
+    - 301
+    - 109
+    - 203
+    - 104
+    - 109
+    - 203
+    - 102
+    - 302
+    - 402
+    - 401
+    - 401
+    - 106
+
+

@@ -80,10 +80,10 @@ class RunDetect:
                 if (name not in detected_videos) and (name not in capturing_videos):
                     
                     pics_output = os.path.join(self.pics_dir, name)
-                    class_output = os.path.join(self.class_dir, name)
-                    if os.path.exists(class_output):
-                        shutil.rmtree(class_output)
-                    os.makedirs(class_output)
+                    # class_output = os.path.join(self.class_dir, name)
+                    # if os.path.exists(class_output):
+                    #     shutil.rmtree(class_output)
+                    # os.makedirs(class_output)
 
                     cmd_source = f" --source {pics_output}"
                     cmd_crop = f" --save-crop"
