@@ -19,3 +19,5 @@ Change_Hero
 Prompts
 Trapped
 Stuck
+Power
+Round_X_Complete
