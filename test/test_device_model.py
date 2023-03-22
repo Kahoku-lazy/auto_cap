@@ -21,7 +21,7 @@ class TestDeviceModel:
         key = cv.waitKey(delay)
         return key
 
-    def model_result(self, input_data, serila_data, regex_expression):
+    def model_result(self, serila_data, regex_expression):
         """ 模型识别结果: TP
         """
         regex = re.compile(regex_expression)
@@ -29,8 +29,7 @@ class TestDeviceModel:
             regex_match = regex.search(value)
             if regex_match:
                 actual_result = regex_match.group(1)    # 模型预测结果
-                if actual_result == str(input_data):
-                    return actual_result
+                return actual_result
         return None
     
     
@@ -52,15 +51,21 @@ class TestDeviceModel:
             key = self.show_img(img, 1500)
             ser_wifi_data = ser_wifi.get_buffer_data()
             ser_ble_data = ser_ble.get_buffer_data()
-            wifi_result = self.model_result(image_serial_number, ser_wifi_data, r".*deteced: (\w+)")
-            ble_result = self.model_result(Lamp_effect[int(image_serial_number)], ser_ble_data, r".*: id (\w+)")
-            if wifi_result and ble_result and int(ble_result) == Lamp_effect[int(wifi_result)]:
+            wifi_result = self.model_result(ser_wifi_data, r".*deteced: (\w+)")
+            ble_result = self.model_result(ser_ble_data, r".*: id (\w+)")
+            print(f">>> model result: image name={image}, model id={wifi_result}, Lamp_effect id={ble_result}")
+            if wifi_result and wifi_result.isdigit() and int(wifi_result) >= len(Lamp_effect) and wifi_result == image_serial_number:
+                log.info(f">>> model result(Not Lamp Effect): image name={image}, model id={wifi_result}, Lamp_effect id={ble_result}")
+                continue
+            elif wifi_result and wifi_result.isdigit()  and int(wifi_result) >= len(Lamp_effect) and wifi_result != image_serial_number:
+                log.error(f">>> model result: image name={image}, model id={wifi_result}, Lamp_effect id={ble_result}")
+                continue
+            if wifi_result and wifi_result.isdigit() and ble_result and wifi_result == image_serial_number and ble_result == str(Lamp_effect[int(wifi_result)]):
                 classes[int(wifi_result)] += 1
                 log.info(f">>> model result: image name={image}, model id={wifi_result}, Lamp_effect id={ble_result}")
             else:
                 log.error(f">>> model result: image name={image}, model id={wifi_result}, Lamp_effect id={ble_result}")
-                
-            print(f">>> model result: image name={image}, model id={wifi_result}, Lamp_effect id={ble_result}")
+            self.show_img(bg, 500)
             if key == 27:   break
 
         ser_wifi.close_serial()

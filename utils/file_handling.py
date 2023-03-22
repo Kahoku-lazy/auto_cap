@@ -346,7 +346,7 @@ class FileHandling:
             os.makedirs(new_path)
         for i in os.listdir(crops_path):
             if i in pictures:
-                shutil.move(os.path.join(pictures, i), os.path.join(new_path, i))
+                shutil.move(os.path.join(picture_path, i), os.path.join(new_path, i))
                 print(f"{os.path.split(picture_path)[-1]} >>> move to {i}")
                 count += 1
         return count 

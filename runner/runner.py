@@ -175,11 +175,11 @@ class Runner:
         print(df)
 
     def del_repeat_image(self, args):
-        """ 去掉重复的图片，将重复的图片移动到新的位置"""
+        """ 去掉重复度大于0.70的图片的图片"""
         if len(args) == 2:
             image_path, similarity = args[0], args[2]
         elif len(args) == 1:
-            image_path, similarity = args[0], 0.70
+            image_path, similarity = args[0], 0.65
 
         self.file_handling.del_repeat_image_similarity(image_path, similarity)
 
