@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import shutil
+import pandas as pd
 
 def del_repeat_image(image_path):
     """ 删除重复的图片 """
@@ -31,12 +32,29 @@ def move_same_name_image(image_, image2_):
             count += 1
     print(f"move count {count}")
 
+def atuo_test_case():
+    """ 自动生成H6601项目, AI灯效的测试用例 """
+    title = ["用例编号", "用例标题", "测试点", "优先级", "前提条件", "操作步骤", "输入数据", "预期结果", "执行结果", "关联需求"]
+
+    df = pd.DataFrame(columns=title)
+    for i in range(9):
+        df.loc[i, "用例编号"]= "HDMI-LAMP_EFFECT_%d" % i
+        df.loc[i, "用例标题"]= "%s特征, 灯效内容显示正确" % "Eliminated"
+        df.loc[i, "测试点"]= "游戏特征对应灯效显示正确"
+        df.loc[i, "优先级"]= "高"
+        df.loc[i, "前提条件"]= "显示器连接到H6601设备\r\n已知播放图片特征内容, 图片模型可识别"
+        df.loc[i, "操作步骤"]= "播放%s特征图片" % "Eliminated"
+        df.loc[i, "输入数据"]= "%s特征图片" % "Eliminated"
+        df.loc[i, "预期结果"]= "灯效显示正确"
+        df.loc[i, "执行结果"]= "None"
+        df.loc[i, "关联需求"]= "None"
+    df.to_excel(r"C:\Users\dingd\Desktop\test_case.xlsx")
+    print(df)
+
+
+
 
 
 if __name__ == "__main__":
-    # path_ = r"D:\Kahoku\HDMI-DATA\Game_Pictures\Overwatch\pictures\Power\crops"
-    # path_2 = r"D:\Kahoku\HDMI_Project\overwatch\All\Eliminated"
-    # move_same_name_image(path_, path_2)
 
-    new_path = r"../Model_Result/images"
-    print(os.path.split(new_path))
+    atuo_test_case()
